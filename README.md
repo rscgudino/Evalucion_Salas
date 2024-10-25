@@ -1,4 +1,5 @@
 # Evalucion_Salas
+---------------------------------------
 Este proyecto es una aplicación web diseñada para facilitar la evaluación de salas en función de diversos parámetros ambientales. Permite a los usuarios ingresar y gestionar datos como temperatura exterior, temperatura del agua y humedad a través de un formulario intuitivo. Además, ofrece la opción de seleccionar diferentes salas y visualizar la información relacionada con las Unidades de Tratamiento de Aire (UTAs) disponibles en cada una.
 
 Características Principales:
