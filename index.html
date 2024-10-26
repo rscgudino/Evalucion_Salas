@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Evaluación de Salas</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     
     <script>
         const utasPorSala = {
@@ -22,11 +22,10 @@
             const cantidadUt = document.getElementById('cantidad_utas').value;
             const contenedorSetpoints = document.getElementById('setpoints');
             const contenedorValores = document.getElementById('valores_utas');
-            contenedorSetpoints.innerHTML = '';  // Limpiar contenido anterior
-            contenedorValores.innerHTML = '';    // Limpiar contenido anterior
+            contenedorSetpoints.innerHTML = '';  
+            contenedorValores.innerHTML = '';    
 
             for (let i = 1; i <= cantidadUt; i++) {
-                // Campo para el setpoint de cada UTA
                 const inputSetpoint = document.createElement('input');
                 inputSetpoint.type = 'text';
                 inputSetpoint.className = 'form-control mb-2';
@@ -34,7 +33,6 @@
                 inputSetpoint.placeholder = `Setpoint UTA ${i}`;
                 contenedorSetpoints.appendChild(inputSetpoint);
 
-                // Campo para el valor actual de cada UTA
                 const inputValor = document.createElement('input');
                 inputValor.type = 'text';
                 inputValor.className = 'form-control mb-2';
@@ -47,32 +45,29 @@
         function actualizarUTAs() {
             const salaSeleccionada = document.getElementById('nombre_sala').value;
             const contenedorUt = document.getElementById('utas');
-            contenedorUt.innerHTML = '';  // Limpiar contenido anterior
+            contenedorUt.innerHTML = '';  
 
             const utas = utasPorSala[salaSeleccionada] || [];
             const cantidadUt = utas.length;
 
-            // Mostrar UTAs disponibles
             for (let i = 0; i < cantidadUt; i++) {
                 const inputUta = document.createElement('input');
                 inputUta.type = 'text';
                 inputUta.className = 'form-control mb-2';
                 inputUta.name = `uta_${i + 1}`;
                 inputUta.value = utas[i];
-                inputUta.readOnly = true; // Hacerlo de solo lectura
+                inputUta.readOnly = true; 
                 contenedorUt.appendChild(inputUta);
             }
 
-            // Actualizar la cantidad de UTAs
             document.getElementById('cantidad_utas').value = cantidadUt;
-            mostrarSetpoints(); // Mostrar setpoints para la cantidad actual de UTAs
+            mostrarSetpoints(); 
         }
     </script>
 </head>
 <body>
     <header class="text-center my-4">
-        <!-- Logo Image -->
-        <img src="/img/logo.jpg" alt="Company Logo" width="150">
+        <img src="{{ url_for('static', filename='img/logo.jpg') }}" alt="Company Logo" width="150">
     </header>
     <div class="container mt-5">
         <h1 class="text-center">Evaluación de Salas<h5>"Prototipo version 0.1"</h5></h1>
@@ -108,24 +103,16 @@
                     <option value="sala ibm2">Sala IBM2</option>
                 </select>
             </div>
-            <div id="utas" class="mb-3">
-                <!-- Los campos de UTAs se agregarán aquí -->
-            </div>
+            <div id="utas" class="mb-3"></div>
             <div class="form-group">
                 <input type="number" id="cantidad_utas" class="form-control" name="cantidad_utas" placeholder="Cantidad de UTAs" required readonly>
             </div>
-            
-            <div id="setpoints" class="mb-3">
-                <!-- Los campos de setpoints se agregarán aquí -->
-            </div>
-            <div id="valores_utas" class="mb-3">
-                <!-- Los campos de valores actuales de las UTAs se agregarán aquí -->
-            </div>
+            <div id="setpoints" class="mb-3"></div>
+            <div id="valores_utas" class="mb-3"></div>
 
             <input type="submit" class="btn btn-primary btn-block" value="Evaluar">
         </form>
         
-        <!-- Botón de reset -->
         <form action="{{ url_for('index') }}" method="get">
             <input type="submit" class="btn btn-secondary btn-block" value="Reset">
         </form>
@@ -164,7 +151,5 @@
             </form>
         </div>
     </footer>
-    
-    
 </body>
 </html>
